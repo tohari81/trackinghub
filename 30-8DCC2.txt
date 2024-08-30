@@ -1,0 +1,33 @@
+COPY
+(
+select
+    partner_number as "Tracking No",
+    reff as "Refference",
+    emboss_number as "Emboss Number",
+    rpx_delivery_to as "Delivery To",
+    addr1 as "Address1",
+    addr2 as "Address2",
+    city as "City",
+    zipcode as "ZIPCode",
+    region as "Region",
+    site as "Site",
+    jenis_order as "Jenis Order",
+    state as "Status",
+    tanggal_order as "Tanggal Order",
+    sys_check as "Tracking/Date",
+    tanggal_cetak as "Tanggal Cetak",
+    sla as "SLA",
+    tanggal_est as "Estimasi",
+    harga as "SLA Harga",
+    berat_gram as "Berat (gram)",
+    jml_kirim as "Jumlah Kirim",
+    rpx_delivery_date as "Delivery Date",
+    tanggal_retur as "Tanggal Retur",
+    tanggal_cetak,
+    sys_check as "Syscheck"
+from bmri_surat
+where product_kode='DCC' 
+    and DATE_PART('YEAR',tanggal_order)='2024'
+    and DATE_PART('MONTH',tanggal_order) in ('05','06','07','08')
+)
+TO '/home/trackinghubadmin/CEKDATA/20240830_DCC_2.csv' With CSV DELIMITER ',' HEADER;

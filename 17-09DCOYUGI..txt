@@ -1,0 +1,25 @@
+COPY
+(
+select
+    reff as "Refference",
+    partner_number as "Tracking No",
+    city,
+    tanggal_order,
+    rpx_delivery_date as "Delivery Date",
+    tanggal_retur as "Tanggal Retur",
+    state as "Status Pengiriman",
+    rpx_retur_status as "Retur Status",
+    rpx_received_by as "Received By", 
+    rpx_rcv_relation as "Hubungan Penerima", 
+    kode_kurir,
+    jenis_order ,
+    emboss_number,
+    zipcode,
+    addr1,
+    addr2
+from bmri_surat
+where product_kode='DCO' 
+    and DATE_PART('YEAR',tanggal_order)='2024'
+    and DATE_PART('MONTH',tanggal_order) in ('05','06','07','08','09')
+)
+TO '/home/trackinghubadmin/CEKDATA/20240917_DCO_YUGI.csv' With CSV DELIMITER ',' HEADER;

@@ -1,0 +1,26 @@
+COPY
+(
+select
+    reff as "Refference",
+    partner_number as "Tracking No",
+    city,
+    tanggal_order,
+    rpx_delivery_date as "Delivery Date",
+    tanggal_retur as "Tanggal Retur",
+    state as "Status Pengiriman",
+    rpx_retur_status as "Retur Status",
+    rpx_received_by as "Received By", 
+    rpx_rcv_relation as "Hubungan Penerima", 
+    rpx_delivery_to as "Delivery To",
+    kode_kurir,
+    jenis_order ,
+    emboss_number,
+    zipcode,
+    addr1,
+    addr2,
+    sys_check as "Tracking/Date"
+from history_surat
+where product_kode='DCC' 
+    and DATE_PART('YEAR',tanggal_order)='2023'
+)
+TO '/home/trackinghubadmin/CEKDATA/20241008_DCC_HISTORY.csv' With CSV DELIMITER ',' HEADER;

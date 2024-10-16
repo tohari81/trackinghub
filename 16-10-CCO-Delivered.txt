@@ -64,6 +64,6 @@ from bmri_surat
 where product_kode='CCO' 
     and DATE_PART('YEAR',tanggal_order)='2024'
     and DATE_PART('MONTH',tanggal_order) in ('06','07','08','09','10')
-    amd state='delivered'
+    and state='delivered'
 )
 TO '/home/trackinghubadmin/CEKDATA/20241016_CCO_DELIVERED.csv' With CSV DELIMITER ',' HEADER;

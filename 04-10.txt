@@ -1,8 +1,0 @@
-COPY
-(
-select
-    *
-from history_surat
-where reff='48Z301E221403' 
-)
-TO '/home/trackinghubadmin/CEKDATA/48Z301E221403.csv' With CSV DELIMITER ',' HEADER;

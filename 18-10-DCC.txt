@@ -1,0 +1,17 @@
+COPY
+(
+select
+    reff as "Refference",
+    emboss_number as "Emboss Number",
+    tanggal_order as "Tanggal Order",
+    sys_check as "Tracking/Date",
+    tanggal_cetak as "Tanggal Cetak",
+    write_date as "Last Modified",
+    write_date as "Last Update",
+    sys_check as "Syscheck",
+    kode_kurir
+from bmri_surat
+where product_kode='DCC' 
+    and DATE_PART('YEAR',tanggal_order)='2024'
+)
+TO '/home/trackinghubadmin/CEKDATA/20241018_DCC.csv' With CSV DELIMITER ',' HEADER;

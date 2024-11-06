@@ -1,0 +1,10 @@
+COPY
+(
+select
+    *
+from bmri_order_surat
+where DATE_PART('YEAR',tanggal_order)='2024'
+    and DATE_PART('MONTH',tanggal_order) in ('02')
+limit 50
+)
+TO '/home/trackinghubadmin/CEKDATA/AUDIT_ORDER.csv' With CSV DELIMITER ',' HEADER;

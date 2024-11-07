@@ -1,0 +1,36 @@
+COPY
+(
+select
+bos.id,
+bos.nomor_order,
+bos.tanggal_order,
+bos.jenis_order,
+bos.pickup_datetime,
+bos.state,
+bos.state_invoice,
+bos.create_uid,
+(select login from res_users ru where ru.id = bos.create_uid) as "Create by",
+bos.create_date,
+bos.write_uid,
+(select login from res_users ru where ru.id = bos.write_uid) as "Update by",
+bos.write_date,
+bos.jenis_product,
+bos.pickup_point,
+bos.sum_biaya,
+bos.product_kode,
+bos.approved_by,
+(select login from res_users ru where ru.id = bos.approved_by) as "Approved by",
+bos.approved_date,
+bos.count_surat,
+bos.count_api_success,
+bos.display_api_status,
+bos.display_color,
+bos.count_api_failed    
+from 
+bmri_order_surat bos
+where 
+DATE_PART('YEAR',bos.tanggal_order)='2024'
+and DATE_PART('MONTH',bos.tanggal_order) in ('02')
+limit 50
+)
+TO '/home/trackinghubadmin/CEKDATA/AUDIT_ORDER.csv' With CSV DELIMITER ',' HEADER;

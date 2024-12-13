@@ -17,4 +17,4 @@ and bs.state !='delivered'
 and bs.product_kode in ('DCO','CCO','DCC') 
 
 )
-TO' /home/trackinghubadmin/CEKDATA/TRACKING20241213.csv' With CSV DELIMITER ',' HEADER;
+TO '/home/trackinghubadmin/CEKDATA/TRACKING20241213.csv' With CSV DELIMITER ',' HEADER;

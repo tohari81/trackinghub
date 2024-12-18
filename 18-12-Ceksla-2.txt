@@ -33,6 +33,6 @@ where product_kode in ('CCO','DCO')
     and DATE_PART('YEAR',tanggal_order)='2024'
     and kode_kurir in ('SAP','NCS','JNE')
     and sla > 2
-    and status != 'delivered'
+    and state != 'delivered'
 )
 TO '/home/trackinghubadmin/CEKDATA/20241218_CEKSLA_2.csv' With CSV DELIMITER ',' HEADER;

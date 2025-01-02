@@ -1,0 +1,48 @@
+COPY
+(
+    select
+        tanggal_order,
+        jenis_order ,
+        jenis_product,
+        product_kode,
+        nomor_order,
+        tipe_order,
+        kode_kurir,
+        id as "order_id",
+        create_date,
+        nomor_order,
+        reff,
+        jenis_product,
+        emboss_number,
+        card_name,
+        addr1,
+        addr2,
+        addr3,
+        addr4,
+        city,
+        zipcode,
+        addr_alt1,
+        addr_alt2,
+        addr_alt3,
+        addr_alt4,
+        city_alt,
+        zipcode_alt,
+        rekanan_id,
+        jenis_order,
+        jml_box,
+        berat,
+        berat_gram,
+        jml_kirim,
+        region,
+        kota,
+        kota_det,
+        rpx_received_by,
+        rpx_rcv_relation,
+        partner_number,
+        rpx_image_foto,
+        rpx_image_signature
+    from bmri_surat
+    where state !='delivered'
+    and product_kode in ('DCO','CCO','DCC') 
+)
+TO '/home/trackinghubadmin/CEKDATA/ORDER20250102_1.csv'  With CSV DELIMITER ',' HEADER;

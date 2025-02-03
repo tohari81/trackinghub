@@ -1,0 +1,25 @@
+COPY
+(
+select
+    reff as "Refference",
+    partner_number as "Tracking No",
+    city,
+    tanggal_order,
+    rpx_delivery_date as "Delivery Date",
+    tanggal_retur as "Tanggal Retur",
+    state as "Status Pengiriman",
+    rpx_retur_status as "Retur Status",
+    rpx_received_by as "Received By", 
+    rpx_rcv_relation as "Hubungan Penerima", 
+    kode_kurir,
+    jenis_order,
+    product_kode,
+    emboss_number,
+    zipcode,
+    addr1,
+    addr2
+from bmri_surat
+where product_kode='DCO' 
+    and tanggal_order between '2024-10-01' and '2025-02-28'
+)
+TO '/home/trackinghubadmin/CEKDATA/20250203_DCO.csv' With CSV DELIMITER ',' HEADER;

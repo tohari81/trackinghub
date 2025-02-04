@@ -65,4 +65,4 @@ where product_kode='DCO'
     and DATE_PART('YEAR',tanggal_order)='2024'
     and DATE_PART('MONTH',tanggal_order) in ('12')
 )
-TO '/home/trackinghubadmin/CEKDATA/20250204_DCO.csv' With CSV DELIMITER ',' HEADER
+TO '/home/trackinghubadmin/CEKDATA/20250204_DCO.csv' With CSV DELIMITER ',' HEADER;

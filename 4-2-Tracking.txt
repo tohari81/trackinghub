@@ -1,0 +1,20 @@
+COPY
+(
+
+select
+brll.id,
+bs.reff,
+brll.rpx_log_line_id as "order_id",
+brll.state,
+brll.description,
+brll."date"
+from
+bmri_rpx_log_line brll,
+bmri_surat bs
+where
+bs.id= brll.rpx_log_line_id
+and bs.state !='delivered'
+and bs.product_kode in ('DCO','CCO','DCC') 
+
+)
+TO '/home/trackinghubadmin/CEKDATA/TRACKING_20250204.csv'  With CSV DELIMITER ',' HEADER;

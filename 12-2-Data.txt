@@ -1,0 +1,24 @@
+COPY
+(
+select
+    partner_number as "Tracking No",
+    reff as "Refference",
+    emboss_number as "Emboss Number",
+    rpx_delivery_to as "Delivery To",
+    addr1 as "Address1",
+    addr2 as "Address2",
+    city as "City",
+    zipcode as "ZIPCode",
+    jenis_order as "Jenis Order",
+    state as "Status",
+    tanggal_order as "Tanggal Order",
+    sla as "SLA",
+    rpx_delivery_date as "Delivery Date",
+    tanggal_retur as "Tanggal Retur",
+	kode_kurir,
+    rpx_retur_status as "Retur Status",
+from bmri_surat
+where product_kode in ('CCO','DCO') 
+    and kode_kurir in ('SAP','NCS','JNE')
+)
+TO '/home/trackinghubadmin/CEKDATA/20250212_DATA.csv' With CSV DELIMITER ',' HEADER;

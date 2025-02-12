@@ -16,7 +16,7 @@ select
     rpx_delivery_date as "Delivery Date",
     tanggal_retur as "Tanggal Retur",
 	kode_kurir,
-    rpx_retur_status as "Retur Status",
+    rpx_retur_status as "Retur Status"
 from bmri_surat
 where product_kode in ('CCO','DCO') 
     and kode_kurir in ('SAP','NCS','JNE')

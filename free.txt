@@ -1,1 +1,0 @@
-free -m | sed -n -e '3p' | grep -Po "\d+$"

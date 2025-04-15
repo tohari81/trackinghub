@@ -20,6 +20,6 @@ select
     addr2
 from bmri_surat
 where product_kode='CCO' 
-    and tanggal_order between '2025-02-01' and '2025-02-31'
+    and tanggal_order between '2025-02-01' and '2025-02-28'
 )
 TO '/home/trackinghubadmin/CEKDATA/20250415_CCO.csv' With CSV DELIMITER ',' HEADER;

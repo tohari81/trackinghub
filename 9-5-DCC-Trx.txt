@@ -64,4 +64,4 @@ from history_surat
 where product_kode in ['EDC','THM'] 
     and tanggal_order between '2024-08-01' and '2025-03-31'
 )
-TO '/home/trackinghubadmin/CEKDATA/20250509_DCC_TRX.csv' With CSV DELIMITER ',' HEADER;
+TO '/home/trackinghubadmin/CEKDATA/20250509_DCC_TRX_History.csv' With CSV DELIMITER ',' HEADER;

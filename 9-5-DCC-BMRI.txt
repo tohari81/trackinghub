@@ -61,7 +61,7 @@ select
     write_date as "Last Modified",
     write_date as "Last Update"
 from bmri_surat
-where product_kode in ['EDC','THM'] 
+where product_kode in ('EDC','THM') 
     and tanggal_order between '2024-08-01' and '2025-03-31'
 )
 TO '/home/trackinghubadmin/CEKDATA/20250509_DCC_TRX_BMRI.csv' With CSV DELIMITER ',' HEADER;

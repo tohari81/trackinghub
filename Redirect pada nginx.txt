@@ -1,0 +1,24 @@
+Pada Nginx web server
+
+Pada praktek saya ini saya mempunyai dua nginx config (seperti config nginx pada umumnya) yang mana config untuk http (port 80) dan https (SSL port 443), namun kadang ada yang menjadikan dua config tersebut menjadi satu file config (digabung).
+
+    Cara redirect http ke https dan non www ke www pada nginx, silahkan tambahkan rule berikut pada config http and port 80:
+    server {
+    server_name domain.com www.domain.com;
+    return 301 https://www.$server_name$request_uri; 
+
+    rule diatas meredirect dari non http dan non www langsung ke https://www ,mayoritas jika anda mencari tutorial di google hanya tutorial ini yang diberikan yang mana rule ini belum berlaku jika anda mengakses website and dengan https://domain.com tidak redirect ke www. Solusinya agar ketika diakses dengan https:// saja ikut redirect ke https://www maka tambahkan rule berikut pada config nginx SSL (port 443)if ($host = $server_name) {
+    return 301 https://www.$server_name$request_uri;
+    }
+    Cara redirect https ke http dan www ke non www pada nginx, silahkan tambahkan rule berikut pada config http and port 443 (ssl):
+    server {
+    server_name domain.com www.domain.com;
+    return 301 http://$server_name$request_uri; 
+
+    Kemudian tambahkan rule berikut pada non SSL port 80
+    if ($host = $server_name) {
+    return 301 http://$server_name$request_uri;
+    }
+
+Demikian tutorial diatas jika anda mengalami kesulitan silahkan comment dan akan saya bantu, terutamamungkin untuk setting pada nginx yang untuk orang awam mungkin sedikit bingung karena ruenya bergabung dengan rule-rule yang lain dalam config.
+

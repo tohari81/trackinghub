@@ -1,5 +1,5 @@
 #! /bin/bash
-#@okik.setianto@bankmandiri.co.id
+#@hari@cendana2000.co.id
 DATE=$(date +"%Y-%m-%d %H:%M")
 CPU=$(top -bn1 | grep load | awk '{printf "%.2f%%\t\n", $(NF-2)}' | sed 's/\%//' | sed 's/\.[^.]*$//')
 MEMORY=$(free -m | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }'| sed 's/\%//'| sed 's/\.[^.]*$//')

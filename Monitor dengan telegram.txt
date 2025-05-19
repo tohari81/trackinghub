@@ -1,0 +1,40 @@
+#! /bin/bash
+#@okik.setianto@bankmandiri.co.id
+DATE=$(date +"%Y-%m-%d %H:%M")
+CPU=$(top -bn1 | grep load | awk '{printf "%.2f%%\t\n", $(NF-2)}' | sed 's/\%//' | sed 's/\.[^.]*$//')
+MEMORY=$(free -m | awk 'NR==2{printf "%.2f%%\t\t", $3*100/$2 }'| sed 's/\%//'| sed 's/\.[^.]*$//')
+DISK=$(df -h | awk '$NF=="/"{printf "%s\t", $5}'| sed 's/\%//')
+#httpcode=$(curl -o /dev/null -s -w "%{http_code}\n" https://trackinghub.id)
+httpcode=$(cat /var/log/nginx/odoo.access.log | grep trackinghub | awk '{print $9}'|tail -1)
+uptime=$(cat /proc/uptime | gawk '{print ($1>86400)?1:0;}')
+flag_uptime=
+#echo $MEMORY
+
+#httpcode=404
+#echo $uptime
+#uptime=0;
+CURRENT_SERVER="https://api.telegram.org"
+BOT_TELEGRAM_SENDER="bot5249136136:AAGrY1TRyfzkWG1RxHqLq2xTzW78XnhhQyE"
+
+if [ $CPU -gt 50 ] #monitor CPU Usage > 50%
+then
+	curl -X POST "$CURRENT_SERVER/$BOT_TELEGRAM_SENDER/sendMessage" -d "chat_id=-688460050&text=$DATE|Trackinghub.id|CPU usage now is $CPU higher then threshold 80%. Please check!!!"
+elif [ $MEMORY -gt 50 ] #monitor Memory Usage > 50%
+then
+	curl -X POST "$CURRENT_SERVER/$BOT_TELEGRAM_SENDER/sendMessage" -d "chat_id=-688460050&text=$DATE|Trackinghub.id|Memory usage now is $MEMORY higher then threshold 80%. Please check!!!"
+elif [ $DISK -gt 80 ] #monitor Disk Usage / > 80%
+then 
+	curl -X POST "$CURRENT_SERVER/$BOT_TELEGRAM_SENDER/sendMessage" -d "chat_id=-688460050&text=$DATE|Trackinghub.id|Disk usage now is $DISK higher then threshold 80%. Please check!!!"
+elif [ $httpcode -ne 200 ] && [ $httpcode -ne 000 ] #monitor HTTP Response Code not equal > 200 (normal)
+then
+	curl -X POST "$CURRENT_SERVER/$BOT_TELEGRAM_SENDER/sendMessage" -d "chat_id=-688460050&text=$DATE|Trackinghub.id|HTTP Response Code is $httpcode. Please check https://trackinghub.id for more details!!!"	
+elif [ $uptime -lt 1 ] #monitor Server Uptime < 1 Day
+#elif [ $uptime < 1 ] && [ $flag_uptime != 1 ]
+then
+#	curl -X POST "$CURRENT_SERVER/$BOT_TELEGRAM_SENDER/sendMessage" -d "chat_id=-688460050&text=$DATE|Trackinghub.id|The Server Uptime is $uptime day. Please check the Server uptime!!!"
+	flag_uptime=1
+else
+echo "None of the condition met"
+fi
+
+echo $flag_uptime

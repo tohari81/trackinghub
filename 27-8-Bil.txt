@@ -62,6 +62,6 @@ select
     write_date as "Last Update"
 from bmri_surat
 where product_kode='BIL' 
-    and tanggal_order between '2025-03-01' and '2025-04-31'
+    and tanggal_order between '2025-03-01' and '2025-04-30'
 )
 TO '/home/trackinghubadmin/CEKDATA/20250826_BIL.csv' With CSV DELIMITER ',' HEADER;

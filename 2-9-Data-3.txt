@@ -1,0 +1,17 @@
+COPY
+(
+select
+    
+    tanggal_order
+    reff,
+    card_name,
+    jenis_product,
+    emboss_number,
+    jenis_order,
+    kode_kurir,
+    partner_number as "Tracking No"
+   
+from bmri_surat
+where tanggal_order between '2024-02-01' and '2025-12-31'
+)
+TO '/home/trackinghubadmin/CEKDATA/20250902_data_3.csv' With CSV DELIMITER ',' HEADER;

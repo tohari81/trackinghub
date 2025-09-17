@@ -61,7 +61,7 @@ select
     write_date as "Last Modified",
     write_date as "Last Update"
 from bmri_surat
-where reff in
+where emboss_number in
 (
 '240716ICSIMPL13894',
 '240716ICSIMPL13889',
